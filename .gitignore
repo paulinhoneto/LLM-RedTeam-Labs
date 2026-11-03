@@ -1,0 +1,47 @@
+# ==========================================
+# AMBIENTE VIRTUAL E DEPENDÊNCIAS
+# ==========================================
+.venv/
+venv/
+env/
+ENV/
+
+# ==========================================
+# CREDENCIAIS E SEGREDOS (CRÍTICO)
+# ==========================================
+# NUNCA suba o arquivo .env para o Git
+.env
+.env.*
+*.env
+*.pem
+*.key
+
+# ==========================================
+# CACHES E ARQUIVOS TEMPORÁRIOS DO PYTHON
+# ==========================================
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ==========================================
+# SISTEMA OPERACIONAL E IDEs
+# ==========================================
+# Arquivos do Windows
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Arquivos do VS Code / PyCharm
+.vscode/
+.idea/
+
+# ==========================================
+# LOGS E BASES DE DADOS LOCAIS
+# ==========================================
+*.log
+*.sqlite3
+*.db

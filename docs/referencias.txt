@@ -1,0 +1,499 @@
+
+https://www.youtube.com/watch?v=ysU2sXHNS7wPrompt 
+Injection : o maior risco de segurança dos agentes de IA 
+
+- Casos reais de ataques 
+- Consequencias e criticidades 
+- Meios mais comuns utilizados para atacar
+- Remediações 
+
+Adicionais impactos sobre agentes especialistas
+
+Exemplos : 
+
+- ler email 
+- acessa dados sensiveis 
+- com autorização descontrolada 
+
+Risco acrescido: 
+
+- dados privados
+- contaxto externo 
+
+https://www.youtube.com/watch?v=y3n1tTZcQLM
+INJEÇÃO DE PROMPT NA IA DO JUDICIÁRIO | Tecnologia e Classe
+
+- casos reais 
+- consequencias dos atos ilegais 
+- vazamento de prompts por magistrados 
+- temtativas que geram vazamento de log 
+- a criatividade de uso dee fonte branca em fundo branca como obscurecer prompt injection 
+
+
+https://www.youtube.com/watch?v=DoJahVk4pdA
+engenharia reversa com IA em tudo 
+
+Geladeira - França 
+
+- Caso de falhas básicas de segurança em controladores industriais
+- Controlados por paineis de controle digitais (controladores)  que gerenciam todo o sistema de refrigeração da
+  loja e podem ser acessados remotamente pela internet para manutenção. 
+- o que os atacantes fizeram?
+  - nao desligaram geladeira
+  - exploram função chamada ciclo degelo ou defrost
+  - toda geladeira precisa derreter o gele que se acumula nas sepertinas de tempos em tempos 
+  - os hackers fizeram foi forçar remotamente a ativação desse ciclo de degelo e impediram q ele fosse desligado
+  - com o sistema de refrigeração desligado e o aquecedor de degelo ligado por horas, a temperatura 
+    interna subiu para 50 graus celsius (em alguns casos, relatos falam em até 80 graus)
+  - isso derreteu tudo, estragou os alimentos e, em alguns casos, o calor intenso danificou a fiação eletrica e
+    causou incendios
+
+Engenharia reversa e a LLM
+
+- empresa de segurança claroty publico experimento em laboratorio mostrando exatamente como uma ia pode ser usada 
+  para isso. 
+- usaram um modelo de linguagem
+- usaram em conjunto ao modelo de linguagem um agente de IA para analisar o firmware de um controlador
+  Danfoss AK-SM  800A - mesmo tipo envolvido no ataque real
+- o objetivo era encontrar e explorar uma falha de bypass de autenticação (CVE-2025-41450) que ja era
+  conhecida publicamente desde 2025
+- resultado :
+  - a IA levou 28 min para enteder a falha e criar um exploit funcional 
+  - o custo em tokens da IA foi de apoximadamente 6 dolares
+  - a IA precisou de intervenção humana em um momento (pesquisador teve que corrigir o rumo da IA)
+    mas o trabalho pesado de analise de codigo binario foi feito pela maquina 
+- como conseguiram rodar o exploit? 
+  - falha de segurança nos controladores danfoss:
+  - para facilitar a manutenção, o sistema gerava uma senha de administrador temporaria a cada dia
+    baseada apenas na data interna do equipamento
+  - como esse algoritmo era conhecido e o firmware podia ser baixado publicamente no site da danfoss,
+    qualquer um podia calcular a senha do dia e entrar no sistema. 
+- o que faltou e faciltou o ataque:
+  - muito desses controladores estavam expostos diretamente na internet, sem vpn ou proteção. 
+  - busca simples no shodan mostrava mais de 1700 controladores Danfoss acessiveis na França
+  - os atacantes só precisaram encontrar um IP exposto, calcular a senha do dia e enviar o comando para ligar
+    o degelo
+- resumo do aprendizado 
+  - o ataque na França no foi um hack de filme, foi a combinação de: 
+    - falha de arquitetura: controladores industriais conectados a internet sem proteção
+    - falha de firmware: senhas previsiveis (baseadas na data) e nao corrigidas em aparelhos antigos 
+    - aceleração por IA: uma LLM conseguiu entender o codigo do firmware e criar o exploite em minutos, 
+      algo qe um humano levaria dias ou semanas.
+
+
+https://www.youtube.com/watch?v=lr7m3qGivto   
+Clonar qualquer software  
+
+
+https://www.youtube.com/watch?v=jozYuKcYLYo
+Como hackers roubaram R$1 bi do brasil sem serem pegos 
+
+- ano 2025 
+- estudo do caso 
+- credencias de funcionario 
+- critical vulnerabilidade
+- fornecedores de serviços essenciais  (ataque à C&M)
+- serviço prestado - BaaS - banking as a service 
+- funciona como uma ponte de tecnologia que conecta dezenas de instituiçoes financeiras 
+  ao sistema e pagamento do banco central 
+- esse ataque é conhecido como supply chain attack 
+- forma mais facil de entrar foi usando um funcionario que ja estava dentro 
+- linkedin fonte de osint sobre funcionarios de qualquer empresa espalhada pelo mundo 
+- cardapio de alvos em pontencial
+- joao nazareno roque
+- senha do funcionario sozzinhas eram inuteis 
+- para usá-las era necessario ter acesso a rede interna da C&M
+- que so era possivel por um computador interno corporativo com vpn ou
+- estando dentro do prédio da empresa
+- então aliciaram o funcionario para executar alguns comandos no computador corporativo que ele possuia
+- notion foi compartilhado para o funcionario ter a cola dos comandos a serem executados 
+- com o comandos injetados pelo funcionario os hackers conseguiam executar os comandos remotamentes 
+- o computador desse funcionario entao tornou-se um pivoting - ataque que uma maquina comprometida é usada
+  para ter acesso ao ambiente isolado
+- existia uma vulnerabilidade de RCE com CVE-2023-XXXX
+- contia certificados desprotegidos 
+- fire in the hole -  
+- ficaram dias e dias na rede interna da empresa 
+- eles usaram certificados ilegitimos emitndo ordem de pagamento contra contas de reserva financeira
+- contiam fundos maximos para serem usadas em momentos de crises
+- madrugada de julho de 2025 - essas reservas começaria a drenar 
+- como as transacoes eram endoçadas por certificados confiaveis foram permitidas 
+- contas de laranjas foram usadas para o inicio da lavagem dos recursos 
+- depois convertidos em criptomoedas
+- diversas exchanges diferentes 
+- corretora smartpay estava atenta indentificando comportamentos suspeitos 
+- denunciariam para as autoridades 
+- alerta foi grande numeros de contas sendo criadas e
+- uma acao cordenada quase que simultanea e massiva de compra de cripto ativos 
+- a solicitação de pagamentos usando os certificados validos para pagamento foi via pix do banco central do brasil
+
+https://www.youtube.com/watch?v=g5dme0yOMeU
+quadrilha golpe no discord
+
+- site fish - aparentemente um mod de micraft em: 
+  - https://trixsmpp.com
+  - comentarios nele apontando para HTTrack - ferramenta que clona websites 
+  - virustotal para verificar arquivos suspeitos 
+
+
+https://www.youtube.com/watch?v=1jGszU1bMwg - canal Joao Cury - 1,02 mi de seguidores - self chanel 
+Rotina de um hacker etico milionario (hackeou o google, apple e governo) - joão brasio 
+
+- engenheiro da computação - curso incompleto 
+- hackeou na epoca que reportar robots.txt era vulmerabilidade 
+
+
+https://1wtoken.com/api/v1/token-api/token/sale/leaderboard?limit=100
+
+https://www.youtube.com/watch?v=Y8OUVGm9lss
+Busfactor’s Insane Bug Bounty Journey and Google Awards (Ep. 144) 
+
+https://www.youtube.com/watch?v=Mp5l-HlA8-U
+Client-Side Path Traversal (CSPT) com Vitor Falcão (busfactor)
+
+vitorfalcao.com
+
+https://www.youtube.com/watch?v=m5pDtayqqUE
+Exploiting and Fixing Client-Side Path Transversal (CSPT) Vulnerabilities | CyberSecurityTV
+
+https://www.youtube.com/watch?v=UOJkPsQDxSc - vitor falcão (busactor)
+Q&A Vivendo de BugBounty | WebSec Talks
+
+=========
+conceitos
+=========
+UUID 
+- userinfo {...} : um objeto JSON com identificadores do usuário 
+  - user_unique_id: um UUID - indentificador pseudominizado 
+    - gerado para rastrear o uso sem expor dados (e-mail ou nome)
+    - ele é unico 
+    - não é uma credencial de autenticação 
+ - web_id: 
+    - outro identificador, geralmente usado para rastrear o navegador/dispositivo especifico    
+
+- para que servem 
+  - Esses dados sao telemetrica publica anonima 
+  - servem para o front-end enviar estatisticas de uso (quantas pessoas usaram, qual navegador, etc)
+    para o servidor de analytics 
+  - não sao tokens de sessão 
+  - nao sao segredos 
+
+- hacker profissional - faria com isso
+  - analisar como esse ID é usado 
+  1 - para onde ele é enviado? 
+      - olharia na aba nw (rede) do DevTools. (ex: https://analytics.exemplo.com/) 
+  2 - ele é refletido? 
+  3 - Há outros dados sensiveis ? na mesma requisição, procure por: 
+      - authorization
+      - cookie 
+      - session 
+      - token 
+    - esses sim sao valiosos
+    - encontrar um token exposto em um log ou emuma URL, isso é uma falha 
+
+- resumo
+  - cracha de visitante (analitics)   
+  - ouro - tokens de autenticação e nos endpoints que processam dados
+  - IDs de rastreamentos - irrelevantes 
+
+exercicio de reconhecimento 
+
+- analisar a estrutura do frontend é o primeiro passo para: 
+  - entender como aplicação se comunica como beckend 
+  - e onde pode existir falhas de lógica ou controle de acesso 
+
+- o que observar? 
+  - mapeamento de superficie 
+    - DevTools(F12) > aba Network (rede)  
+    - recarregue a pagina 
+    - interagir com o chat
+
+  - o que precisa indentificar 
+
+    - Endpoints da API: Filter por Fetch/XHR. vera as chamadas para o backend
+      ( ex: /api/v0/chat/completion, /api/v0/users/..). 
+    
+    - WebSockets: Filtre por ws. o chat da deepsek usa websocket para streaming de respostas?
+      Se sim, anoto a URL (ex: wss://...). A comunicação via WS é um vetor interessante para
+      testes de injeção de mensagens. 
+    
+    - Headers de Autenticação: Em cada requisiçã, verifico os headers. procuro por: 
+      - Authorization: Bearer ..., Cookie, ou tokens CSRF. Esses são os dados sensiveis. 
+  
+    - Paramentro e Payloads: Clco em uma requisição de chat e vejo o que esta sendo enviado. Há
+      campos como model, prompt, conversation_id, user_id? como eles sao validados?   
+
+
+Deepseek 
+
+estrutura source fronted end 
+
+- top
+
+- chat.deepseek.com 
+  - a/chat/s
+    - id_chat
+- challenges.cloudflare.com
+  - turnstile/v0
+- fe-static.deepseek.com
+  - chat/static
+- if3-data.volccdn.com 
+  - obj/data-static/log-sdk/collect/5.0
+    - collect-rangers-v5.2.11.js
+- wasm
+  - 0005c306 
+  
+analise da estrutura encontrada 
+
+chat.deepseek.com/a/chat/s/id_chat
+
+O que é: Este é o endpoint da "Single Page Application" (SPA). O /a/chat/s/ é uma rota do frontend, e id_chat é o identificador da conversa.
+
+Oportunidade: Esse id_chat é o seu alvo principal para testar IDOR (Insecure Direct Object Reference)
+Se você alterar esse ID, consegue ver a conversa de outra pessoa? O DeepSeek provavelmente usa um UUID (aleatório e longo), o que torna o ataque inviável. Se for um número sequencial (ex: s/123, s/124), aí é uma falha grave. Teste isso.
+
+chat_id
+96164f62-9e0d-4523-be26-50a5d886891f - Hacking IA
+84867b31-8e42-4d83-9ed3-feea9ec9ac01 - Teste payload IA
+
+==============
+analise 1 para:
+=============== 
+
+networking > filter > fetch/xhr 
+51cecae9-e5ee-420f-a71b-2d0963023f12 (UUID v4) - Auditoria-Log-Segurança
+
+meu contexto: 
+logado > oauth2 google > chat_ids 
+
+escopos por chat_id 
+
+$home = https://chat.deepseek.com/ 
+
+4 escopos distintos com type: xhr: 
+
+main
+api/v0/client/settings?did=558a08f1-568d-483c-b795-53497dc01d01&scope=main
+model
+api/v0/client/settings?did=558a08f1-568d-483c-b795-53497dc01d01&scope=main
+web_upgrade
+api/v0/client/settings?did=558a08f1-568d-483c-b795-53497dc01d01&scope=web_upgrade
+provider
+api/v0/client/settings?did=558a08f1-568d-483c-b795-53497dc01d01&scope=provider
+
+
+padrão de arquitetura de uma SPA moderna (Single Page Application) que usa um sistema de escopos (scopes) para carregar configurações específicas.
+
+2. O parâmetro did (Device ID)
+parâmetro did (Device ID)
+Note o did=558a08f1-568d-483c-b795-53497dc01d01. Esse é o Device ID, um identificador único do seu navegador/dispositivo. Ele é enviado em todas as requisições de configuração. É um dado sensível? Sim, ele identifica o seu dispositivo. Se você alterar esse did para o de outra pessoa, o servidor pode retornar as configurações daquela pessoa? Teste isso. (Se o servidor não validar a propriedade do did, pode ser um vazamento de configurações).
+
+3. Os Escopos (scope)
+
+Você encontrou quatro endpoints diferentes:
+
+scope=main: Configurações gerais da conta.
+scope=web_upgrade: Provavelmente configurações de plano/assinatura (upgrade).
+scope=provider: Configurações do provedor (talvez relacionado ao Google OAuth).
+model: Configurações de modelo (qual modelo a IA está usando).
+
+sso mostra que o backend separa as responsabilidades. Cada escopo tem sua própria lógica de validação.
+
+🛡️ O que são esses dois tokens?
+   Authorization: Bearer e o x-settings-token
+   
+   DeepSeek implementou uma camada extra de segurança (defesa em profundidade).
+   
+Authorization: Bearer <token>: 
+
+* Este é o token padrão de autenticação (OAuth2/JWT). Ele prova quem você é (sua identidade). Sem ele, o servidor não sabe que você está logado via Google.
+* Ele geralmente tem um tempo de vida curto e é enviado em todas as requisições
+
+ x-settings-token: <token>:
+
+* Este é um Token de Contexto (ou Token de Capacidade / CSRF Token customizado). Ele prova que você tem permissão para acessar 
+  aquele escopo específico (main, model, web_upgrade, etc.) naquele momento.
+
+* Por que a DeepSeek usa isso? Para mitigar CSRF (Cross-Site Request Forgery) e vazamento de escopo. 
+  Se um atacante roubar apenas o Bearer Token (ex: via XSS), ele pode não conseguir alterar as configurações do modelo 
+  se não tiver o x-settings-token correspondente.
+
+
+
+OAuth 2.0 for Native AppsRFC 8252 
+- obrigatoriamente implementar ao fluxo
+  - PKCE (Proof Key for Code Exchange)
+
+Exigências:  
+
+- "Public native app clients MUST implement the Proof Key for Code Exchange (PKCE) extension to OAuth"  - RFC 8252, Seção 6.
+   PKCE obrigatório para apps nativos 
+
+Ou seja: se você está fazendo um app nativo (público) com OAuth 2.0, você não pode implementar o OAuth "puro". 
+Você é obrigado a acoplar o PKCE ao fluxo
+
+Não são duas implementações separadas; é uma implementação de OAuth 2.0 que inclui o PKCE como parte inseparável do fluxo de código.
+
+A Falha da CVE-2020-7692 (Google OAuth Client)
+
+A descrição da CVE é precisa: "PKCE support is not implemented in accordance with the RFC for OAuth 2.0 for Native Apps" .
+
+Isso significa que a biblioteca não fazia a verificação de posse que o PKCE exige. Sem o PKCE funcionando, o código de autorização que volta para o app é apenas um "bilhete" que qualquer app malicioso no mesmo dispositivo pode interceptar (via registro do mesmo esquema de URI) e trocar por um token de acesso 
+
+A falha não é "ter PKCE mas mal". A falha é que a biblioteca não implementava a proteção do PKCE de forma alguma (ou de forma incompleta), deixando o código de autorização vulnerável a interceptação.
+O atacante rouba o código e o usa antes do app legítimo, porque o servidor de autorização não tem como distinguir quem está trocando o código .
+
+Implementação Modelo Resumida (RFC 8252 + PKCE)
+
+Aqui está o fluxo mínimo que um bug hunter precisa reconhecer como correto:
+
+Passo 1: O App gera o code_verifier (segredo local)
+O app cria uma string aleatória longa (43-128 caracteres). Isso nunca sai do app.
+
+Passo 2: O app calcula o code_challenge
+code_challenge = BASE64URL(SHA256(code_verifier)) . 
+
+Passo 3: O app abre o navegador com a URL de autorização 
+
+https://servidor.com/authorize?
+  response_type=code
+  &client_id=app_id
+  &redirect_uri=com.app:/callback
+  &code_challenge=XYZ123... (o hash)
+  &code_challenge_method=S256
+
+O que obersvar aqui : response_type=code (nunca token). presença de code_challenge e 
+code_challenge_method=S256 . 
+
+Passo 4: O usuário autoriza e o navegador redireciona de volta
+com.app:/callback?code=ABC456
+
+O app recebe apenas um codigo temporário. nehum token aparece aqui 
+
+Passo 5: O app troca o código por um token (nos bastidores)
+O app faz um POST para o servidor de token enviando:
+
+- o code recebido 
+- o code_verifier original (o segredo do Passo 1)
+
+Passo 6: o servidor valida 
+o servidor pega o code_verifier recebido, aplica SHA256, e compara com o code_challence que ele guardou no passo 3.
+se baterem, ele emite o token. se não baterem, ele nega 
+
+Por que o blue team derrata o bule red ? 
+se um app malicioso interceptar o code no Passo 4 (via URI scheme), ele não terá o code_verifier que o app legitimo
+gerou no Passo 1. quando ele tentar trocar o codigo por um outro token no Passo 5, servidor vai negar, porque
+o hash do que ele enviar (ou a ausência do verifier) não corresponderá ao code_challenge original. 
+
+O fluxo implicito é inseguro por design porque pula os Passos 1, 2, 3 (parcialmente) e 5. ele devolve o token 
+diretamente no Passo 4 ( response_type=token ), na URL. como não ha troca de código, não há onde aplicar o PKCE. 
+o  token é roubado diretamente da URL se interceptado .
+
+como identificar no mundo real (Bug Hunter)
+Olhe para a URL de autorização que o app abre: 
+
+característica                    correto (RFC 8252 + PKCE)                 Inseguro/Implicoto 
+response_type                     code                                      token ou id_token token 
+code_challenge                    presente                                  ausente
+code_challenge_method             S256 (ou plain)                           ausente
+volta no redirect                 ?code=...                                 #access_token=...  
+
+
+Se você interceptar o redirect e ver um access_token na URL, o app está usando fluxo implicito 
+(ou hibrido Inseguro). Se vc ver um code mas não houver code_challenge na URL inicial, o PKCE não esta sendo usado, e aquele code é roubável 
+
+
+
+🎯 Onde estão as oportunidades de teste?
+
+IDOR no did (Device ID): Se você interceptar a requisição GET /api/v0/client/settings?did=SEU_DID&scope=main e alterar o did para outro valor, 
+o servidor retorna algo diferente? Se ele retornar as configurações de outro usuário, você tem uma falha de Exposição de Informação.
+
+IDOR no chat_id (Conversa): Você já tem o chat_id de uma conversa sua. Tente acessar o endpoint que carrega o conteúdo da conversa 
+(provavelmente algo como GET /api/v0/chat/{chat_id}). Altere o chat_id para um UUID aleatório. O servidor retorna 403 Forbidden ou 404 Not Found? 
+Se retornar 200 OK com dados de outra pessoa, é uma falha crítica.
+
+Manipulação de scope: O que acontece se você mudar o scope de main para admin ou internal? O servidor pode ter 
+um escopo oculto que não é validado corretamente. Tente scope=admin, scope=internal, scope=debug.
+
+Injeção no did ou chat_id: Esses parâmetros são UUIDs, mas o servidor os valida? Tente injetar um 
+payload de SQL Injection (' OR 1=1--) ou um caminho de arquivo (../../etc/passwd) no did e veja se o erro do servidor revela algo.
+
+============================
+FIM
+============================   
+
+Reference Pratical with John Hammond:  
+https://www.youtube.com/watch?v=IlSe2o4ixAY (JSON Web Keys (JWK & JWT) - "Emergency" - HackTheBox Business CTF)
+
+python3 jwt_tool.py <SEU_JWT> -X k -pk public.pem
+
+JWS(RFC 7515) 
+- define formato e o mecanismo de verificação de assinatura do JWS (JSON Web Signature) 
+
+JWT(RFC 7519) 
+- é uma aplicação concreta do JWS. A assintautra JWT que vejo é essencialmente um objeto JWS.
+
+Posicionamento Central do RFC 7515
+- o RFC 7515 especifica como assinar digitalmente o conteúdo no formato JSON (ou protegê-lo com HMAC). 
+  garantindo integridade e autenticidade dos dados. Ele define: 
+
+  -  Estrutura JWS: Consiste em três partes—Protected Header, Payload e Signature—conectadas por pontos (.), 
+     sendo esta a forma padrão dos JWT.
+
+  -  Papel do parâmetro alg: No cabeçalho (Header), alg especifica o algoritmo usado para assinar 
+    (como RS256, HS256), sendo um dos campos mais críticos para a segurança.
+
+Relação com JWT
+
+JWT (RFC 7519) é uma "carga útil de declarações" transportada usando a estrutura JWS. Quando você decodifica a primeira parte de um JWT (Header), vê algo como {"alg": "RS256", "typ": "JWT"}—isso é exatamente o Protected Header do JWS. Portanto, entender o RFC 7515 é entender como a assinatura JWT é gerada e verificada.
+
+
+Ponto de Entrada para Testes de Segurança (Caça de Bugs)
+
+Como pesquisador de segurança, ao auditar JWT, o núcleo é verificar se a implementação de verificação de assinatura do JWS (RFC 7515) está rigorosa. As falhas comuns incluem:
+
+- Ataque alg: none: Se o servidor aceitar tokens JWT com alg definido como none e assinatura vazia, um atacante pode forjar qualquer identidade. Houve um caso em que o Authlib falhou ao rejeitar alg: none, causando bypass de autenticação; a Microsoft Titan também sofreu com falha na verificação de assinatura, permitindo que um pesquisador falsificasse um administrador e recebesse uma recompensa de $5.000.
+
+- Ataque de confusão de algoritmo: Se o servidor suportar simultaneamente algoritmos simétricos (HMAC) e assimétricos (RSA), um atacante pode alterar alg para HS256 e usar a chave pública (exposta publicamente) como chave secreta HMAC para forjar assinaturas, enganando o servidor.
+
+- Sobrescrita de cabeçalho: Se a biblioteca der prioridade ao alg no cabeçalho não protegido (Unprotected Header) sobre o protegido (Protected Header), um atacante pode contornar a verificação alterando o cabeçalho não protegido.
+
+Resumo em uma frase: O RFC 7515 é a "lei" das assinaturas JWT. Qualquer falha na verificação de assinatura (aceitar none, confusão de algoritmos, confiar erroneamente em cabeçalhos não protegidos) é uma violação das suas especificações, podendo levar diretamente a bypass de autenticação ou escalação de privilégios.
+
+RFC 7517 JWK 
+- define o formato JWK (JSON Web Key), em termos simples, ele especifica como usar o formato JSON para representar
+  uma chave criptografica (geralmente chave pública)
+
+JWK 
+um objeto json que descreve os detalhes de uma chave. por exemplo, para uma chave publica RSA, ele contem o modulo
+n, o expoente e, o tipo de chave kty (como "RSA"), o identificador da chave kid, etc.
+
+
+JWK Set (JWKS):
+É um array JSON chamado keys, que contém um conjunto de JWKs. Geralmente, o servidor de autenticação fornece um endpoint JWKS onde o aplicativo cliente pode buscar todas as chaves públicas usadas para verificar assinaturas .
+
+Para que serve: A função mais comum é verificar a assinatura de um JWT. O servidor usa sua chave privada para assinar o JWT; o cliente ou servidor que recebe o JWT usa a chave pública no formato JWK publicado no endpoint JWKS para verificar se a assinatura é válida
+
+
+
+
+
+
+
+
+
+
+
+
+OAuth 2.0 for Browser-Based Applications
+https://www.rfc-editor.org/info/rfc10017/   - recomendavel ler antes: 
+
+RFC  8252 : BCP  212 : OAuth 2.0 para aplicativos nativos
+RFC 8252: BCP 212: OAuth 2.0 for Native Apps
+
+https://www.youtube.com/watch?v=eahrNP4DMv8
+https://qoder.com/pricing
+
+Hacking autonomo
+https://www.youtube.com/watch?v=C5ir_rQ4L4g

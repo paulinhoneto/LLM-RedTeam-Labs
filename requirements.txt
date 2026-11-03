@@ -1,0 +1,3 @@
+freelm
+python-dotenv
+groq
