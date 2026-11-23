@@ -21,7 +21,7 @@ O Lab 3 usa uma leitura simulada e uma função de e-mail que imprime no console
 | [9 · Guardrails e avaliação](../lab_9/README.md) | Avançado | Respostas fictícias rotuladas → matriz de resultados e taxas de erro por filtro |
 | [10 · Consumo sem limites](../lab_10/README.md) | Intermediário | Solicitações fictícias → decisão por tamanho e cota por conta |
 
-Os onze relatórios `issue_lab_*.txt` estão em [docs](./). Eles registram experimentos históricos. O [README público](https://github.com/paulinhoneto/LLM-RedTeam-Labs) apresenta as mesmas quatro categorias e cita `/issues`, mas a árvore pública e a local usam `docs/`. O README local tem escapes literais de Markdown. O Lab 1 atual envia um pedido direto sem contexto, embora o banner diga “indireta”. Base64 e outros cenários do README aparecem nos relatórios e não são executados pelo script atual.
+Os onze relatórios `issue_lab_*.txt` estão em [docs](./) e registram experimentos históricos. O [README principal](../README.md) reúne o catálogo e o início rápido. O Lab 1 atual envia um pedido direto sem contexto, embora o banner diga “indireta”. Os cenários históricos de Base64 estão nos relatórios.
 
 ## Execução em PowerShell
 

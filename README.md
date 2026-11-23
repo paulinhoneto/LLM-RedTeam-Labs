@@ -1,66 +1,52 @@
-\# 🛡️ LLM RedTeam Labs
+# LLM-RedTeam-Labs
 
+Laboratórios em Python para estudar segurança de aplicações com modelos de linguagem (LLMs). O projeto mostra onde o código que conecta o modelo a dados e ferramentas pode aplicar controles de procedência, autorização, isolamento e limites de uso. Os exercícios usam dados fictícios e abordam temas do OWASP Top 10 para aplicações com LLMs.
 
+## Comece offline pelo PowerShell
 
-\*\*Framework de Pesquisa e Testes de Segurança (Red Team) em Large Language Models.\*\*
+Na raiz do repositório, use um Python instalado para criar um ambiente virtual. Se `env` já existir e estiver funcional, basta definir `$labPython` e executar os dois últimos comandos.
 
+```powershell
+python -m venv --without-pip .\env
+$labPython = '.\env\Scripts\python.exe'
+& $labPython -I -B -X utf8 .\lab_6\tool_calling.py --cenario outro-titular
+& $labPython -I -B -X utf8 -m unittest discover -s tests -v
+```
 
+No Lab 6, o chamado permanece aberto quando a proposta parte de uma sessão sem acesso àquele recurso. Os Labs 5 a 10 e a suíte de testes usam a biblioteca padrão, sem chamadas de rede ou configuração de credenciais. Os testes do motor usam um cliente simulado.
 
-Este repositório contém uma suíte de laboratórios práticos desenvolvidos para explorar, validar e documentar vulnerabilidades em sistemas baseados em Inteligência Artificial, seguindo as diretrizes do OWASP Top 10 para LLMs.
+## Catálogo de laboratórios
 
+| Lab | Tema | O que observar |
+| --- | --- | --- |
+| [1](lab_1/teste_sms.py) | Injeção direta | O script envia um pedido de transformação de texto como mensagem do usuário. |
+| [2](lab_2/teste_injecao_indireta.py) | Injeção indireta | O script apresenta ao modelo um log fictício como contexto. |
+| [3](lab_3/teste_chained_injection.py) | Injeção em cadeia e Markdown | O orquestrador avalia texto e simula uma ação no console. |
+| [4](lab_4/teste_confused_deputy.py) | Confused Deputy | O exemplo ilustra o risco de decidir uma ação com base no texto do modelo. |
+| [5](lab_5/README.md) | RAG Poisoning | A recuperação omite documentos que não correspondem ao catálogo aprovado. |
+| [6](lab_6/README.md) | Tool Calling | A mesma proposta tem resultados diferentes conforme a permissão e a titularidade. |
+| [7](lab_7/README.md) | Segurança MCP | Uma chamada simulada passa por validação de entrada e verificação de escopo. |
+| [8](lab_8/README.md) | Isolamento entre usuários | A resolução do ID de uma nota depende da conta da sessão. |
+| [9](lab_9/README.md) | Guardrails e avaliação | Filtragens de saída são comparadas por falsos positivos e falsos negativos. |
+| [10](lab_10/README.md) | Consumo sem limites | Entradas inválidas e contas sem cota são barradas antes da inferência simulada. |
 
+## Labs 1 a 4 com provedor
 
-\## 🎯 Objetivos do Projeto
+Os quatro scripts usam [`motor_llm.py`](motor_llm.py), que monta as mensagens e chama o provedor via FreeLLM. Para executá-los em um escopo autorizado, prepare um ambiente separado com pip e as dependências de [`requirements.txt`](requirements.txt).
 
-O foco principal é demonstrar, através de provas de conceito (PoCs) em Python, como as falhas de segurança em IA muitas vezes não estão no modelo em si (que possui alinhamento RLHF), mas sim na arquitetura do \*\*Orquestrador\*\* (o código que conecta a IA às ferramentas e dados).
+```powershell
+python -m venv .\venv
+$labPython = '.\venv\Scripts\python.exe'
+& $labPython -m pip install -r .\requirements.txt
+```
 
+Configure localmente a variável do provedor no `.env` da raiz, como `GROQ_API_KEY` para Groq. O Git ignora esse arquivo. Execute o script do laboratório desejado a partir da raiz, por exemplo `& $labPython -I -B -X utf8 .\lab_1\teste_sms.py`. O [guia do projeto](docs/PROJECT-GUIDE.md) traz os comandos dos quatro laboratórios e os detalhes do motor.
 
+## Documentação
 
-\## 🧪 Laboratórios Incluídos
+- [Guia do projeto](docs/PROJECT-GUIDE.md) para arquitetura e execução.
+- [Relatórios históricos](docs/) para observações de experimentos anteriores e propostas de mitigação.
+- [Roadmap](docs/ROADMAP.md) e [histórico de sessões](docs/SESSION-LOG.md) para acompanhar a evolução do projeto.
+- [Instruções do projeto](AGENTS.md) para usar o menu `prompts` no Codex e escolher entre estudo, criação de laboratórios e revisão de segurança.
 
-
-
-\- \*\*Lab 1: Injeção Direta e Jailbreak\*\* - Testes de bypass de guardrails usando engenharia social, inversão de strings e codificação (Base64).
-
-\- \*\*Lab 2: Injeção Indireta (Context Poisoning)\*\* - Exploração de falhas através da inserção de comandos maliciosos em contextos (SMS, e-mails, logs).
-
-\- \*\*Lab 3: Chained Injection \& Markdown\*\* - Tentativas de exfiltração de dados usando injeções em cadeia e renderização de links/imagens maliciosas.
-
-\- \*\*Lab 4: Confused Deputy (Falha de Orquestração)\*\* - Demonstração de como um Orquestrador frágil pode executar ações maliciosas ao confiar cegamente na saída (output) do LLM.
-
-
-
-\## 🛠️ Tecnologias Utilizadas
-
-\- \*\*Python 3\*\*
-
-\- \*\*freelm\*\* (Roteamento dinâmico de APIs gratuitas: Groq, Gemini, OpenRouter)
-
-\- \*\*python-dotenv\*\* (Gerenciamento de credenciais)
-
-
-
-\## ⚙️ Como Executar
-
-1\. Clone o repositório.
-
-2\. Crie um ambiente virtual (`python -m venv .venv`) e ative-o.
-
-3\. Instale as dependências (`pip install -r requirements.txt`).
-
-4\. Crie um arquivo `.env` na raiz com as suas chaves de API (ex: `GROQ\_API\_KEY="sua\_chave"`).
-
-5\. Navegue até a pasta do laboratório desejado e execute o script (ex: `python lab\_1/teste\_sms.py`).
-
-
-
-\## 📄 Documentação
-
-Os resultados e análises de cada teste estão documentados na pasta de relatórios (`/issues`), contendo a visão do atacante (Red Team) e as mitigações recomendadas (Blue Team).
-
-
-
-\---
-
-\*Este projeto foi desenvolvido para fins estritamente educacionais e de pesquisa em segurança cibernética.\*
-
+Use dados fictícios e mantenha os exercícios em recursos locais, próprios ou expressamente autorizados. Ao registrar resultados, indique se a evidência vem de uma simulação local ou de uma chamada real ao provedor.
