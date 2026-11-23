@@ -1,5 +1,7 @@
 # Lab 9 · Guardrails e avaliação
 
+**Português (Brasil)** · [English](README.en.md)
+
 **Nível avançado.** Compare dois filtros de saída usando as mesmas seis respostas fictícias. A pergunta de avaliação é quantas saídas indevidas passam e quantas legítimas são bloqueadas.
 
 ## Cenário e hipótese

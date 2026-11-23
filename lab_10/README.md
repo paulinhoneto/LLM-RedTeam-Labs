@@ -1,5 +1,7 @@
 # Lab 10 · Consumo sem limites
 
+**Português (Brasil)** · [English](README.en.md)
+
 **Nível intermediário.** Verifique como um serviço pode proteger a capacidade de inferência com limites aplicados antes da chamada ao modelo. O tema corresponde a [Consumo sem limites no OWASP Top 10 de 2026](https://genai.owasp.org/resource/owasp-genai-llm-top-10-2026/).
 
 ## Cenário e hipótese

@@ -1,5 +1,7 @@
 # Lab 6 · Tool Calling e autorização
 
+**Português (Brasil)** · [English](README.en.md)
+
 **Nível intermediário.** Tool calling permite ao modelo propor uma chamada estruturada com o nome da ferramenta e seus argumentos. A aplicação recebe essa proposta e decide se pode executá-la.
 
 ## Cenário e hipótese

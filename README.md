@@ -1,5 +1,7 @@
 # LLM-RedTeam-Labs
 
+**Português (Brasil)** · [English](README.en.md)
+
 Laboratórios em Python para estudar segurança de aplicações com modelos de linguagem (LLMs). O projeto mostra onde o código que conecta o modelo a dados e ferramentas pode aplicar controles de procedência, autorização, isolamento e limites de uso. Os exercícios usam dados fictícios e abordam temas do OWASP Top 10 para aplicações com LLMs.
 
 ## Comece offline pelo PowerShell
@@ -19,10 +21,10 @@ No Lab 6, o chamado permanece aberto quando a proposta parte de uma sessão sem 
 
 | Lab | Tema | O que observar |
 | --- | --- | --- |
-| [1](lab_1/teste_sms.py) | Injeção direta | O script envia um pedido de transformação de texto como mensagem do usuário. |
-| [2](lab_2/teste_injecao_indireta.py) | Injeção indireta | O script apresenta ao modelo um log fictício como contexto. |
-| [3](lab_3/teste_chained_injection.py) | Injeção em cadeia e Markdown | O orquestrador avalia texto e simula uma ação no console. |
-| [4](lab_4/teste_confused_deputy.py) | Confused Deputy | O exemplo ilustra o risco de decidir uma ação com base no texto do modelo. |
+| [1](lab_1/README.md) | Injeção direta | O script envia um pedido de transformação de texto como mensagem do usuário. |
+| [2](lab_2/README.md) | Injeção indireta | O script apresenta ao modelo um log fictício como contexto. |
+| [3](lab_3/README.md) | Injeção em cadeia e Markdown | O orquestrador avalia texto e simula uma ação no console. |
+| [4](lab_4/README.md) | Confused Deputy | O exemplo ilustra o risco de decidir uma ação com base no texto do modelo. |
 | [5](lab_5/README.md) | RAG Poisoning | A recuperação omite documentos que não correspondem ao catálogo aprovado. |
 | [6](lab_6/README.md) | Tool Calling | A mesma proposta tem resultados diferentes conforme a permissão e a titularidade. |
 | [7](lab_7/README.md) | Segurança MCP | Uma chamada simulada passa por validação de entrada e verificação de escopo. |

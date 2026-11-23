@@ -1,5 +1,7 @@
 # Lab 8 · Isolamento entre usuários
 
+**Português (Brasil)** · [English](README.en.md)
+
 **Nível intermediário.** Use duas contas fictícias para verificar que uma consulta só retorna dados da conta associada à sessão.
 
 ## Cenário e hipótese

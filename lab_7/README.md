@@ -1,5 +1,7 @@
 # Lab 7 · Segurança MCP
 
+**Português (Brasil)** · [English](README.en.md)
+
 **Nível intermediário.** Aprenda a validar argumentos e verificar permissões em cada chamada de ferramenta. O laboratório simula, em memória, a fronteira do servidor que recebe uma mensagem `tools/call`. Ele usa o formato de mensagem da [especificação MCP](https://modelcontextprotocol.io/specification/2025-11-25/server/tools) e cobre apenas esse recorte, sem transporte, negociação de sessão ou SDK.
 
 ## Cenário e hipótese

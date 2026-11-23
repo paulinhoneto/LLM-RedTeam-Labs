@@ -1,5 +1,7 @@
 # Lab 5 · RAG Poisoning e procedência
 
+**Português (Brasil)** · [English](README.en.md)
+
 **Nível intermediário.** Em RAG (geração aumentada por recuperação), um sistema busca documentos e fornece os trechos encontrados como contexto para a resposta. Neste exercício, um acervo fictício em memória representa o índice e a saída cita os trechos aprovados diretamente. Isso torna visível a seleção de contexto sem depender de um modelo.
 
 ## Cenário e modelo de ameaça
